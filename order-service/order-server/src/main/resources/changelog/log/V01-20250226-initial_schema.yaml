@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: liquibaseuser
+      changes:
+        - sqlFile:
+            path: changelog/sql/V01-20250226-initial_schema.sql
+            relativeToChangelogFile: false

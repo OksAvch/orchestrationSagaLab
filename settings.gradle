@@ -1,1 +1,3 @@
 rootProject.name = 'sagaLab'
+include ('order-service', 'order-service:order-client', 'order-service:order-server')
+

@@ -1,0 +1,24 @@
+server:
+  port: 8091
+spring.cloud.stream:
+  bindings:
+    supplier-out-0:
+      destination: order-created
+    consumer-in-0:
+      destination: order-updated
+---
+spring:
+  jpa:
+    defer-datasource-initialization: true
+  liquibase:
+    change-log: classpath:changelog/db.changelog-master.yaml
+    url: jdbc:postgresql://${ORDER_DB_HOST:localhost}:5432/orderdb
+    user: admin
+    password: admin
+#    springframework.data.r2dbc: debug
+  r2dbc:
+    url: r2dbc:postgresql://${ORDER_DB_HOST:localhost}:5432/orderdb
+    username: admin
+    password: admin
+
+
