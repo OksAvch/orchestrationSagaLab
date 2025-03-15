@@ -26,7 +26,19 @@ services:
     networks:
       - order-service
 
+  inventory-service:
+    build:
+      context: .
+      dockerfile: ./inventory-service/Dockerfile
+    ports:
+      - "8092:8092"
+    networks:
+      - inventory-service
+
 networks:
+  inventory-service:
+    ipam:
+      driver: default
   order-service:
     ipam:
       driver: default

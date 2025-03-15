@@ -1,0 +1,3 @@
+rootProject.name = 'inventory-service'
+include 'inventory-server', 'inventory-client'
+
