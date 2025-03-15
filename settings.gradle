@@ -2,4 +2,5 @@ rootProject.name = 'sagaLab'
 include 'order-service', 'order-service:order-client', 'order-service:order-server'
 include 'inventory-service', 'inventory-service:inventory-server', 'inventory-service:inventory-client'
 include 'payment-service', 'payment-service:payment-server', 'payment-service:payment-client'
+include 'orchestrator-service', 'orchestrator-service:orchestrator-server', 'orchestrator-service:orchestrator-client'
 

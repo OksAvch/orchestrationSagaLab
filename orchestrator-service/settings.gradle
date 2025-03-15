@@ -1,0 +1,3 @@
+rootProject.name = 'orchestrator-service'
+include 'orchestrator-server', 'orchestrator-client'
+

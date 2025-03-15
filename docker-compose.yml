@@ -1,4 +1,40 @@
 services:
+  controller-1:
+    image: apache/kafka:latest
+    container_name: controller-1
+    environment:
+      KAFKA_NODE_ID: 1
+      KAFKA_PROCESS_ROLES: controller
+      KAFKA_LISTENERS: CONTROLLER://:9093
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+    networks:
+      - order-service
+
+  broker-1:
+    image: apache/kafka:latest
+    container_name: broker-1
+    environment:
+      KAFKA_NODE_ID: 4
+      KAFKA_PROCESS_ROLES: broker
+      KAFKA_LISTENERS: 'PLAINTEXT://:9092'
+      KAFKA_ADVERTISED_LISTENERS: 'PLAINTEXT://host.docker.internal:9092'
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_CONTROLLER_QUORUM_VOTERS: 1@controller-1:9093
+      KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      ALLOW_PLAINTEXT_LISTENER: yes
+    networks:
+      - order-service
+    ports:
+      - 9092:9092
+    depends_on:
+      - controller-1
+
   order-db:
     image: postgres:14.1-alpine
     restart: always
@@ -19,10 +55,12 @@ services:
       dockerfile: ./order-service/Dockerfile
     environment:
       - ORDER_DB_HOST=order-db
+      - KAFKA_HOST=broker-1
     ports:
       - "8091:8091"
     depends_on:
       - order-db
+      - broker-1
     networks:
       - order-service
 
@@ -43,6 +81,23 @@ services:
       - "8093:8093"
     networks:
       - payment-service
+
+  orchestrator-service:
+    build:
+      context: .
+      dockerfile: ./orchestrator-service/Dockerfile
+    environment:
+      - KAFKA_HOST=broker-1
+      - PAYMENT_HOST=payment-service
+      - INVENTORY_HOST=inventory-service
+    ports:
+      - "8094:8094"
+    depends_on:
+      - broker-1
+    networks:
+      - order-service
+      - payment-service
+      - inventory-service
 
 networks:
   order-service:

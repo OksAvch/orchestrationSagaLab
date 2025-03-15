@@ -1,0 +1,30 @@
+server:
+  port: 8094
+---
+spring.cloud:
+  function:
+    definition: processorQueue
+  stream:
+    bindings:
+      processorQueue-in-0:
+        destination: order-created
+        group: orchestrator-order-created-consumer-group
+      processorQueue-out-0:
+        destination: order-updated
+    kafka:
+      binder:
+        brokers: ${KAFKA_HOST:localhost}:9092
+        replication-factor: 1
+        consumer-properties:
+          enable.auto.commit: true
+---
+service:
+  endpoints:
+    inventory: http://${INVENTORY_HOST:localhost}:8092
+    payment: http://${PAYMENT_HOST:localhost}:8093
+
+---
+#logging.level:
+#  org.springframework.cloud.stream: DEBUG
+#  org.springframework.kafka: DEBUG
+#  org.apache.kafka.clients.consumer: DEBUG

@@ -1,13 +1,11 @@
-package com.oksavch.orderclient.dto;
+package com.oksavch.orchestrator.dto;
 
 import com.oksavch.orderclient.enums.OrderStatus;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
 @Data
-@NoArgsConstructor
 public class OrchestratorResponseDTO {
 
     private Integer userId;

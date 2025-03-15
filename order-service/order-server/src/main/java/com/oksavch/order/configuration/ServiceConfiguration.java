@@ -10,12 +10,12 @@ import reactor.core.publisher.Sinks;
 public class ServiceConfiguration {
 
     @Bean
-    public Sinks.Many<OrchestratorRequestDTO> sink(){
+    public Sinks.Many<OrchestratorRequestDTO> sink() {
         return Sinks.many().unicast().onBackpressureBuffer();
     }
 
     @Bean
-    public Flux<OrchestratorRequestDTO> flux(Sinks.Many<OrchestratorRequestDTO> sink){
+    public Flux<OrchestratorRequestDTO> flux(Sinks.Many<OrchestratorRequestDTO> sink) {
         return sink.asFlux();
     }
 
