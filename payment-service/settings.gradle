@@ -1,0 +1,3 @@
+rootProject.name = 'payment-service'
+include 'payment-server', 'payment-client'
+

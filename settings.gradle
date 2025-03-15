@@ -1,5 +1,5 @@
 rootProject.name = 'sagaLab'
-include ('order-service', 'order-service:order-client', 'order-service:order-server', 'inventory-service', 'inventory-service:inventory-server')
-include 'inventory-service:inventory-client'
-findProject(':inventory-service:inventory-client')?.name = 'inventory-client'
+include 'order-service', 'order-service:order-client', 'order-service:order-server'
+include 'inventory-service', 'inventory-service:inventory-server', 'inventory-service:inventory-client'
+include 'payment-service', 'payment-service:payment-server', 'payment-service:payment-client'
 

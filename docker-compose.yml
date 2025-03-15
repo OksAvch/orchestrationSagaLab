@@ -35,11 +35,23 @@ services:
     networks:
       - inventory-service
 
+  payment-service:
+    build:
+      context: .
+      dockerfile: ./payment-service/Dockerfile
+    ports:
+      - "8093:8093"
+    networks:
+      - payment-service
+
 networks:
+  order-service:
+    ipam:
+      driver: default
   inventory-service:
     ipam:
       driver: default
-  order-service:
+  payment-service:
     ipam:
       driver: default
 
