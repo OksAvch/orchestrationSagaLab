@@ -13,7 +13,8 @@ It uses Spring Boot as an application core, Kafka for event-driven communication
 [Apache Kafka](https://hub.docker.com/r/apache/kafka)    
 [Gradle Multi-Project Build](https://docs.gradle.org/current/userguide/intro_multi_project_builds.html)
 
-### Order Service:
+
+### Building services:
 1. To build order-service execute command below from root directory `sagaLab`
    `docker build --progress=plain --no-cache -t order-service -f ./order-service/Dockerfile .`
 2. To build order-service execute command below from root directory `sagaLab`
@@ -24,7 +25,7 @@ It uses Spring Boot as an application core, Kafka for event-driven communication
    `docker build --progress=plain --no-cache -t orchestrator-service -f ./orchestrator-service/Dockerfile .`
 
 
-### All services
+### Starting all services
 To start all the services execute command below from root directory `sagaLab`
 ```
 docker-compose build 
