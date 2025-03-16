@@ -1,6 +1,7 @@
 ### About the Application
 This Spring application was created to gain practical experience with the Saga Orchestration pattern. 
-It uses Spring Boot as an application core, Kafka for event-driven communication between services, and PostgresDB for data storage.
+It uses Spring Boot as an application core, Kafka for event-driven communication between services, and PostgresDB for data storage.     
+
 ![architecture.png](documentation/appDiagram.png)
 
 
