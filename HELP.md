@@ -1,9 +1,3 @@
-### About the Application
-This Spring application was created to gain practical experience with the Saga Orchestration pattern. 
-It uses Spring Boot as an application core, Kafka for event-driven communication between services, and PostgresDB for data storage.
-![architecture.png](documentation/appDiagram.png)
-
-
 ### Inspired by:
 [Orchestration Saga Pattern With Spring Boot](https://www.vinsguru.com/orchestration-saga-pattern-with-spring-boot)    
 [MicroServices – How To Share DTO](https://www.vinsguru.com/microservices-architecture-how-to-share-dto-data-transfer-objects/)    
@@ -28,9 +22,7 @@ To start all the services execute command below from root directory `sagaLab`
 ```
 docker-compose build 
 docker-compose up -d
-```
 or
-```
 docker-compose up --build -d
 ```
 
